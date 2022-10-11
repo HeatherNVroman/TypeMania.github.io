@@ -1,7 +1,10 @@
 //import files
-import Phaser from 'phaser';
+import Phaser, { Time } from 'phaser';
 import logoImg from '.././assets/logo.png';
 import React, { Component } from 'react';
+import { Sleeping } from 'matter';
+import { wait } from '@testing-library/user-event/dist/utils';
+import { waitFor } from '@testing-library/react';
 
 //phaser game component
 
@@ -33,8 +36,14 @@ export default class Game extends Component {
         yoyo: true,
         loop: -1
       });
+      wait(10);
+      create();
     }
-
+    
+    function update ()
+    {
+    }
+    
     //precondition: recieves a Songmap object. Songmap class must have a static constant property: INITIAL_ARRAY
     //postcondition: returns a shuffled array of integers [0-60)
     function seededPRNG({bpm, length, seed}){
@@ -65,11 +74,7 @@ export default class Game extends Component {
       
       return shuffle(unshuffledArray, seed); //the cut down array is uniformly shuffled x amount of times where x is the songmap's seed
   }
-    
-    function update ()
-    {
-    }
-    
+
     new Phaser.Game(config)
   }
 
